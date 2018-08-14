@@ -1,21 +1,24 @@
 import numpy as np
 from numpy import matrix
 from copy import copy
-
+from normalVector import normalVector
+from getShuffle import getShuffle
+from vectorCosine import vectorCosine
+from hdmUOG import hdmUOG
 
 class HDM: #HDM memory model (see Kelly, Kwok, & West, 2015)
 
         #%actual values of these properties are set in the constructor
-        percepts = 0
-        concepts = 0
-        labels = 0
-        placeholder = 0
-        left = 0
-        n = 0 # n: the dimensionality of a percept or concept
-        m = 0 # m: the number of percepts / concepts
-        # activation threshold: if max similarity is below this, retrieval failure occurs
-        activationThreshold = 0
-        name = 'HDM';  # name of the model
+        # percepts = 0
+        # concepts = 0
+        # labels = 0
+        # placeholder = 0
+        # left = 0
+        # n = 0 # n: the dimensionality of a percept or concept
+        # m = 0 # m: the number of percepts / concepts
+        # # activation threshold: if max similarity is below this, retrieval failure occurs
+        # activationThreshold = 0
+        # name = 'HDM';  # name of the model
 
 
         # construct HDM model
@@ -96,7 +99,8 @@ class HDM: #HDM memory model (see Kelly, Kwok, & West, 2015)
             for i in range(0,num_sentences):
                 # check to see if there's a invalid index:
                 #   disallow Inf, NaN, and Zero values
-                foundMin=min(numpy.where(x == 0)[0],numpy.where(x == np.nan)[0],numpy.where(x == np.inf)[0],numpy.where(x == -np.inf)[0])
+                # foundMin=min(np.where(x == 0)[0],np.where(x == np.nan)[0],np.where(x == np.inf)[0],np.where(x == -np.inf)[0])
+                foundMin=min(np.where(indices == 0)[0],np.where(indices == np.nan)[0],np.where(indices == np.inf)[0],np.where(indices == -np.inf)[0])
                 # if there is an invalid index, end the sentence before it
                 if foundMin[0]:
                     sent_len = foundMin[0] - 1
@@ -117,13 +121,15 @@ class HDM: #HDM memory model (see Kelly, Kwok, & West, 2015)
         
         # retrieve from HDM the memory vector identified by label
         def getConcept(self,label):
-            index = lookup(label,self.labels)
+            # index = lookup(label,self.labels)
+            index = self.labels.index(label)
             concept = self.concepts[index]
             return concept
         
         # retrieve from HDM the environment vector identified by label
         def getPercept(self,label):
-            index = lookup(label,obj.labels)
+            # index = lookup(label,self.labels)
+            index = self.labels.index(label)
             percept = self.percepts[index]
             return percept
     

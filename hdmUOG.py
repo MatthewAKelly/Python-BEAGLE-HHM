@@ -38,7 +38,7 @@ def hdmUOG( percepts, p, left):
     [numOfItems,N] = np.shape(percepts)[0], np.shape(percepts)[1]
     
     if left is None:
-		left = range(0,N)
+        left = np.arange(0,N)
 
     chunk = [0]*N
     sum = [0]*N

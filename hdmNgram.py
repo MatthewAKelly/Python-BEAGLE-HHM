@@ -28,7 +28,7 @@ def hdmNgram (percepts2, p, left2):
     left=copy(left2)
     [numOfItems,N] = np.shape(percepts)[0], np.shape(percepts)[1]
     if left is None:
-		left = range(0,N)
+        left = np.arange(0,N)
 
     gram = percepts[0]
     sum  = [0]*N
